@@ -27,7 +27,7 @@ class ShoesRepository {
         }
     }
 
-    fun updateOrderReward(shoesId: Long, newSizeValue: Int): Flow<Boolean> {
+    fun updateOrderShoes(shoesId: Long, newSizeValue: Int): Flow<Boolean> {
         val index = orderShoes.indexOfFirst { it.shoes.id == shoesId }
         val result = if (index >= 0) {
             val orderShoess = orderShoes[index]

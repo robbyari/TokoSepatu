@@ -1,0 +1,32 @@
+package com.robbyari.tokosepatu.ui.screen.home
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.robbyari.tokosepatu.data.ShoesRepository
+import com.robbyari.tokosepatu.model.OrderShoes
+import com.robbyari.tokosepatu.ui.common.UiState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
+
+class HomeViewModel(
+    private val repository: ShoesRepository
+) : ViewModel() {
+    private val _uiState: MutableStateFlow<UiState<List<OrderShoes>>> = MutableStateFlow(UiState.Loading)
+
+    val uiState: StateFlow<UiState<List<OrderShoes>>>
+        get() = _uiState
+
+    fun getAllShoes() {
+        viewModelScope.launch {
+            repository.getAllShoes()
+                .catch {
+                    _uiState.value = UiState.Error(it.message.toString())
+                }
+                .collect { orderShoes ->
+                    _uiState.value = UiState.Success(orderShoes)
+                }
+        }
+    }
+}

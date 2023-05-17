@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TokoSepatu</string>
+    <string name="menu_profile">Profile</string>
+    <string name="favorite">Favorite</string>
 </resources>
