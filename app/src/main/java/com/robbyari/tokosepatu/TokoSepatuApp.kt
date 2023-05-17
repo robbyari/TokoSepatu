@@ -2,6 +2,8 @@ package com.robbyari.tokosepatu
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -14,21 +16,21 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.robbyari.tokosepatu.ui.components.TopBarHome
 import com.robbyari.tokosepatu.ui.navigation.NavigationItem
 import com.robbyari.tokosepatu.ui.navigation.Screen
 import com.robbyari.tokosepatu.ui.screen.cart.CartScreen
@@ -46,7 +48,9 @@ fun TokoSepatuApp(
     val navBackStackEntry by navContoller.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
+
     Scaffold(
+        topBar = { TopBarHome() },
         bottomBar = {
             if (currentRoute != Screen.DetailShoes.route) {
                 BottomBar(navContoller)
@@ -84,12 +88,14 @@ fun TokoSepatuApp(
 fun BottomBar(
     navContoller: NavHostController,
     modifier: Modifier = Modifier
-        .padding(20.dp)
-        .clip(RoundedCornerShape(20)),
-
+        .background(color = Color.Transparent)
+        .padding(20.dp, 0.dp, 20.dp, 20.dp),
     ) {
     BottomAppBar(
         modifier = modifier
+            .offset(0.dp, 0.dp)
+            .clip(RoundedCornerShape(20.dp)),
+
     ) {
         val navBackStackEntry by navContoller.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

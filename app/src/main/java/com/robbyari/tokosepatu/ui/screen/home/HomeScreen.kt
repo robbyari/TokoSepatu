@@ -32,7 +32,11 @@ fun HomeScreen(
             }
 
             is UiState.Success -> {
-
+                HomeContent(
+                    orderShoes = uiState.data,
+                    modifier = modifier,
+                    navigateToDetail = navigateToDetail
+                )
             }
 
             is UiState.Error -> {}
@@ -50,7 +54,7 @@ fun HomeContent(
        columns = GridCells.Adaptive(160.dp),
        contentPadding = PaddingValues(16.dp),
        horizontalArrangement = Arrangement.spacedBy(16.dp),
-       verticalArrangement = Arrangement.spacedBy(16.dp),
+       verticalArrangement = Arrangement.spacedBy(20.dp),
        modifier = modifier
    ) {
        items(orderShoes) { data ->

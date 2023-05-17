@@ -48,7 +48,7 @@ fun ShoesItem(
     ) {
         Box(
             modifier = modifier
-                .size(150.dp, 150.dp)
+                .size(160.dp, 160.dp)
                 .clip(RoundedCornerShape(20.dp))
                 .background(color = Color.DarkGray),
             contentAlignment = Alignment.Center
@@ -74,7 +74,7 @@ fun ShoesItem(
             }
         }
         Row(
-            modifier = modifier.offset(-50.dp),
+            modifier = modifier.offset(-59.dp),
         ) {
             Icon(
                 imageVector = Icons.Default.Star,
@@ -96,14 +96,14 @@ fun ShoesItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.offset(-20.dp)
+            modifier = Modifier.offset(-31.dp)
         )
         Text(
             text = title,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.size(140.dp, 20.dp)
+            modifier = Modifier.size(160.dp, 20.dp)
         )
     }
 }
