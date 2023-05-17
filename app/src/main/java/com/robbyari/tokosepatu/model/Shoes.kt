@@ -5,5 +5,5 @@ data class Shoes(
     val image: Int,
     val title: String,
     val price: Int,
-    val rating: Double
+    val rating: Double,
 )
