@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,13 +51,13 @@ fun ShoesItem(
         Box(
             modifier = modifier
                 .clip(RoundedCornerShape(20.dp))
-                .background(color = Color.DarkGray),
+                .background(color = colorResource(id = R.color.grey)),
         ) {
             Image(
                 painter = painterResource(image),
                 contentDescription = null,
                 modifier = modifier
-                    .size(200.dp)
+                    .size(180.dp)
                     .rotate(-15f)
                     .offset(-10.dp, -10.dp)
             )
@@ -85,6 +86,7 @@ fun ShoesItem(
                 text = rating,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
+                color = colorResource(id = R.color.white),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = modifier
 
@@ -94,6 +96,7 @@ fun ShoesItem(
             text = price,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
+            color = colorResource(id = R.color.white),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.align(Alignment.Start)
         )
@@ -101,8 +104,11 @@ fun ShoesItem(
             text = title,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
+            color = colorResource(id = R.color.white),
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.size(155.dp, 20.dp).align(Alignment.Start)
+            modifier = Modifier
+                .size(155.dp, 20.dp)
+                .align(Alignment.Start)
         )
     }
 }

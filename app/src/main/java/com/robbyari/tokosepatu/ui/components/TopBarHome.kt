@@ -47,10 +47,12 @@ fun TopBarHome(
         ) {
             Text(
                 text = "Selamat Datang",
+                color = colorResource(id = R.color.white)
             )
             Text(
                 text = "Robby Ari Wibowo",
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
+                color = colorResource(id = R.color.white)
             )
         }
         Icon(

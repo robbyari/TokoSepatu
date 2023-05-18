@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import com.robbyari.tokosepatu.R
 
@@ -17,6 +18,6 @@ fun DetailScreen(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
-        Text("DetailScreen")
+        Text("DetailScreen",color = colorResource(id = R.color.white))
     }
 }

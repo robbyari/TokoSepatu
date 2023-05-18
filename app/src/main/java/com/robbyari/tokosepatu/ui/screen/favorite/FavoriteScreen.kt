@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import com.robbyari.tokosepatu.R
 
@@ -18,6 +19,6 @@ fun FavoriteScreen(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
-        Text(stringResource(R.string.favorite))
+        Text(stringResource(R.string.favorite),color = colorResource(id = R.color.white))
     }
 }

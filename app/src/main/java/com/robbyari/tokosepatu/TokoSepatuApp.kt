@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -16,10 +18,15 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,8 +34,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -103,14 +117,14 @@ fun BottomBar(
         modifier = modifier
             .padding(30.dp, 0.dp, 30.dp, 0.dp)
             .clip(RoundedCornerShape(20.dp)),
-
+        containerColor = colorResource(id = R.color.orange),
     ) {
         val navBackStackEntry by navContoller.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
         val navigationItems = listOf(
             NavigationItem(
                 icon = Icons.Default.Home,
-                screen = Screen.Home
+                screen = Screen.Home,
             ),
             NavigationItem(
                 icon = Icons.Default.ShoppingCart,
@@ -130,9 +144,14 @@ fun BottomBar(
                 icon = {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = colorResource(R.color.orange),
+                    unselectedIconColor = White,
+                    indicatorColor = colorResource(R.color.white)
+                ),
                 selected = currentRoute == item.screen.route,
                 onClick = {
                     navContoller.navigate(item.screen.route) {
