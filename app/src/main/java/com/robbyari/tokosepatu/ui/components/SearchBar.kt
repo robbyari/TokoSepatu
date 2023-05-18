@@ -48,7 +48,7 @@ fun SearchBar(
         modifier = modifier
     ) {
         SearchItem(query = query, onQueryChange = onQueryChange)
-        
+        SearchItem(query = query, onQueryChange = onQueryChange)
     }
 }
 
@@ -91,7 +91,11 @@ fun FilterButton(
 ) {
     Button(
         onClick = {},
-        modifier = modifier
+        modifier = modifier,
+        shape = RoundedCornerShape(20.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.LightGray
+        )
     ) {
         Icon(
             painter = painterResource(id = R.drawable.baseline_filter_list_24),
@@ -101,6 +105,8 @@ fun FilterButton(
         )
     }
 }
+
+
 
 @Preview(showBackground = true )
 @Composable

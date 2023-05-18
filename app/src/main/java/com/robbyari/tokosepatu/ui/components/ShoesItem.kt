@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.provider.CalendarContract
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -48,18 +49,16 @@ fun ShoesItem(
     ) {
         Box(
             modifier = modifier
-                .size(160.dp, 160.dp)
                 .clip(RoundedCornerShape(20.dp))
                 .background(color = Color.DarkGray),
-            contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(image),
                 contentDescription = null,
                 modifier = modifier
-                    .size(130.dp)
+                    .size(200.dp)
                     .rotate(-15f)
-                    .offset(-8.dp)
+                    .offset(-10.dp, -10.dp)
             )
             TextButton(
                 onClick = {},
@@ -74,7 +73,7 @@ fun ShoesItem(
             }
         }
         Row(
-            modifier = modifier.offset(-59.dp),
+            modifier = Modifier.align(Alignment.Start),
         ) {
             Icon(
                 imageVector = Icons.Default.Star,
@@ -96,14 +95,14 @@ fun ShoesItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.offset(-31.dp)
+            modifier = Modifier.align(Alignment.Start)
         )
         Text(
             text = title,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.size(160.dp, 20.dp)
+            modifier = Modifier.size(155.dp, 20.dp).align(Alignment.Start)
         )
     }
 }

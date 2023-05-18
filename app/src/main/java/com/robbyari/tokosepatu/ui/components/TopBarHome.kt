@@ -39,7 +39,7 @@ fun TopBarHome(
             painter = painterResource(R.drawable.ic_dicoding),
             contentDescription = null,
             modifier = modifier
-                .size(60.dp)
+                .size(50.dp)
                 .clip(CircleShape),
         )
         Column(

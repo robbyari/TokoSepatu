@@ -2,9 +2,13 @@ package com.robbyari.tokosepatu
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -13,23 +17,30 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.robbyari.tokosepatu.data.ShoesRepository
+import com.robbyari.tokosepatu.ui.ViewModelFactory
 import com.robbyari.tokosepatu.ui.components.TopBarHome
 import com.robbyari.tokosepatu.ui.navigation.NavigationItem
 import com.robbyari.tokosepatu.ui.navigation.Screen
@@ -43,30 +54,29 @@ import com.robbyari.tokosepatu.ui.theme.TokoSepatuTheme
 @Composable
 fun TokoSepatuApp(
     modifier: Modifier = Modifier,
-    navContoller: NavHostController = rememberNavController()
+    viewModel: TokoSepatuViewModel = viewModel(factory = ViewModelFactory(ShoesRepository())),
+    navController: NavHostController = rememberNavController()
 ) {
-    val navBackStackEntry by navContoller.currentBackStackEntryAsState()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
 
     Scaffold(
         topBar = { TopBarHome() },
-        bottomBar = {
-            if (currentRoute != Screen.DetailShoes.route) {
-                BottomBar(navContoller)
-            }
-        },
-        modifier = modifier
+        floatingActionButtonPosition = FabPosition.Center,
+        floatingActionButton = { BottomBar(navController) },
+        modifier = modifier,
+        containerColor = Color.Transparent,
     ) { innerPadding ->
         NavHost(
-            navController = navContoller,
+            navController = navController,
             startDestination = Screen.Home.route,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
                 HomeScreen(
                     navigateToDetail = { shoesId ->
-                        navContoller.navigate(Screen.DetailShoes.createRoute(shoesId))
+                        navController.navigate(Screen.DetailShoes.createRoute(shoesId))
                     }
                 )
             }
@@ -88,12 +98,10 @@ fun TokoSepatuApp(
 fun BottomBar(
     navContoller: NavHostController,
     modifier: Modifier = Modifier
-        .background(color = Color.Transparent)
-        .padding(20.dp, 0.dp, 20.dp, 20.dp),
     ) {
     BottomAppBar(
         modifier = modifier
-            .offset(0.dp, 0.dp)
+            .padding(30.dp, 0.dp, 30.dp, 0.dp)
             .clip(RoundedCornerShape(20.dp)),
 
     ) {
