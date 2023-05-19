@@ -59,11 +59,10 @@ fun ShoesItem(
                 modifier = modifier
                     .size(180.dp)
                     .rotate(-15f)
-                    .offset(-10.dp, -10.dp)
             )
             TextButton(
                 onClick = {},
-                modifier = modifier.offset(-50.dp, -50.dp)
+                modifier = modifier
             ) {
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,

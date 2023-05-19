@@ -49,16 +49,19 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.robbyari.tokosepatu.data.ShoesRepository
 import com.robbyari.tokosepatu.ui.ViewModelFactory
 import com.robbyari.tokosepatu.ui.components.TopBarHome
 import com.robbyari.tokosepatu.ui.navigation.NavigationItem
 import com.robbyari.tokosepatu.ui.navigation.Screen
 import com.robbyari.tokosepatu.ui.screen.cart.CartScreen
+import com.robbyari.tokosepatu.ui.screen.detail.DetailScreen
 import com.robbyari.tokosepatu.ui.screen.favorite.FavoriteScreen
 import com.robbyari.tokosepatu.ui.screen.home.HomeScreen
 import com.robbyari.tokosepatu.ui.screen.profile.ProfileScreen
@@ -103,6 +106,26 @@ fun TokoSepatuApp(
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()
+            }
+            composable(
+                route = Screen.DetailShoes.route,
+                arguments = listOf(navArgument("shoesId") {type = NavType.LongType})
+            ) {
+                val id = it.arguments?.getLong("shoesId") ?: -1L
+                DetailScreen(
+                    shoesId = id,
+                    navigateBack = { navController.navigateUp() },
+                    navigateToCart = {
+                        navController.popBackStack()
+                        navController.navigate(Screen.Cart.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                )
             }
         }
     }

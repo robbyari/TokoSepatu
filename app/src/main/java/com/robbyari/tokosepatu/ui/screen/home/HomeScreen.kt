@@ -77,27 +77,18 @@ fun HomeContent(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.airjordanpromo),
-            contentDescription = "ekoe",
-            modifier = modifier
-                .size(350.dp, 130.dp)
-                .clip(RoundedCornerShape(15)),
-            contentScale = ContentScale.Crop
-        )
         LazyVerticalGrid(
             columns = GridCells.Adaptive(160.dp),
             contentPadding = PaddingValues(16.dp),
             horizontalArrangement = Arrangement.spacedBy(15.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
-            //userScrollEnabled = false,
             modifier = modifier
         ) {
             items(orderShoes) { data ->
                 ShoesItem(
                     image = data.shoes.image,
                     title = data.shoes.title,
-                    price = data.shoes.price,
+                    price = data.shoes.price.toString(),
                     rating = data.shoes.rating,
                     modifier = Modifier.clickable {
                         navigateToDetail(data.shoes.id)

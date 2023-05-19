@@ -27,12 +27,12 @@ class ShoesRepository {
         }
     }
 
-    fun updateOrderShoes(shoesId: Long, newSizeValue: Int): Flow<Boolean> {
+    fun updateOrderShoes(shoesId: Long, newCountValue: Int): Flow<Boolean> {
         val index = orderShoes.indexOfFirst { it.shoes.id == shoesId }
         val result = if (index >= 0) {
             val orderShoess = orderShoes[index]
             orderShoes[index] =
-                orderShoess.copy(shoes = orderShoess.shoes, size = newSizeValue)
+                orderShoess.copy(shoes = orderShoess.shoes, count = newCountValue)
             true
         } else {
             false
@@ -44,7 +44,7 @@ class ShoesRepository {
         return getAllShoes()
             .map { orderShoes ->
                 orderShoes.filter { orderShoes ->
-                    orderShoes.size != 0
+                    orderShoes.count != 0
                 }
             }
     }
