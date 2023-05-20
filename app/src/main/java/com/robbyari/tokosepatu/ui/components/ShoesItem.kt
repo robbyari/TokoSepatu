@@ -2,8 +2,10 @@ package com.robbyari.tokosepatu.ui.components
 
 import android.content.res.Configuration
 import android.provider.CalendarContract
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -67,7 +69,9 @@ fun ShoesItem(
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,
                     contentDescription = null,
-                    modifier = modifier.size(30.dp),
+                    modifier = modifier
+                        .size(30.dp)
+                        .clickable { Log.d("testklik", "Favorite") },
                     tint = Color.White
                 )
             }
@@ -92,7 +96,7 @@ fun ShoesItem(
             )
         }
         Text(
-            text = price,
+            text = "Rp $price",
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             color = colorResource(id = R.color.white),
@@ -117,7 +121,7 @@ fun ShoesItem(
 fun ShoesItemPreview() {
     TokoSepatuTheme {
         Surface {
-            ShoesItem(image = R.drawable.air_force_1_sculpt_shoes, title = "Air Force 1 Sculp Shoes", price = "Rp 2.450.000", rating = "4.5")
+            ShoesItem(image = R.drawable.air_force_1_sculpt_shoes, title = "Air Force 1 Sculp Shoes", price = "2.450.000", rating = "4.5")
         }
     }
 }

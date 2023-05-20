@@ -1,17 +1,12 @@
 package com.robbyari.tokosepatu.ui.screen.detail
 
-import android.icu.text.CaseMap.Title
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,14 +15,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -83,10 +74,10 @@ fun DetailScreen(
                     basePrice = data.shoes.price,
                     count = data.count,
                     rating = data.shoes.rating,
-                    onBackClick = { navigateBack },
+                    onBackClick =  navigateBack ,
                     onAddToCart = { count ->
                         viewModel.addToCart(data.shoes, count)
-                        navigateToCart
+                        navigateToCart()
                     }
                 )
 
@@ -113,18 +104,18 @@ fun DetailContent(
     var orderCount by rememberSaveable { mutableStateOf(count) }
 
     Column(
-        modifier = Modifier,
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .verticalScroll(rememberScrollState())
                 .weight(1f)
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = "back",
-                modifier = Modifier
+                modifier = modifier
                     .padding(16.dp)
                     .clickable { onBackClick() },
                 tint = Color.White
@@ -191,16 +182,14 @@ fun DetailContent(
             }
         }
         Column(
-            modifier = Modifier,
+            modifier = Modifier.padding(top = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
         ) {
             ProductCounter(
                 orderId = 1,
                 orderCount = orderCount,
                 onProductIncreased = {orderCount++},
                 onProductDecreased = {if (orderCount > 0) orderCount--},
-                modifier = modifier
             )
             totalPrice = basePrice * orderCount
             OrderButton(

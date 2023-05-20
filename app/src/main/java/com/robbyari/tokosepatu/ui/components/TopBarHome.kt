@@ -1,7 +1,9 @@
 package com.robbyari.tokosepatu.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.Icon
@@ -29,7 +32,8 @@ import com.robbyari.tokosepatu.ui.theme.TokoSepatuTheme
 
 @Composable
 fun TopBarHome(
-    modifier: Modifier = Modifier.padding(5.dp)
+    modifier: Modifier = Modifier.padding(5.dp),
+    navigateToProfile: () -> Unit
 ) {
     Row(
         modifier = modifier,
@@ -50,16 +54,17 @@ fun TopBarHome(
                 color = colorResource(id = R.color.white)
             )
             Text(
-                text = "Robby Ari Wibowo",
+                text = "Jetpack Compose",
                 style = MaterialTheme.typography.titleMedium,
                 color = colorResource(id = R.color.white)
             )
         }
         Icon(
-            imageVector = Icons.Default.Notifications,
-            contentDescription = null,
+            imageVector = Icons.Default.AccountBox,
+            contentDescription = "about_page",
             modifier = modifier
-                .size(30.dp),
+                .size(30.dp)
+                .clickable { navigateToProfile() },
             tint = Color.White
         )
     }
@@ -69,7 +74,7 @@ fun TopBarHome(
 @Composable
 fun TopBarHomePreview() {
     TokoSepatuTheme {
-        TopBarHome()
+        TopBarHome(navigateToProfile = {})
     }
 }
 

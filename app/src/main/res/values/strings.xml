@@ -4,4 +4,6 @@
     <string name="favorite">Favorite</string>
     <string name="required_price">Rp %d</string>
     <string name="add_to_cart">Tambah ke Keranjang : Rp %d</string>
+    <string name="total_order">Total Pesanan : Rp %d</string>
+    <string name="share_message">Hey, I want buy %1$d shoes with total price Rp %2$d. Do you want too?</string>
 </resources>

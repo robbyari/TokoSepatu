@@ -2,15 +2,8 @@ package com.robbyari.tokosepatu
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.offset
+import android.util.Log
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -18,32 +11,20 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.DarkGray
-import androidx.compose.ui.graphics.Color.Companion.Green
-import androidx.compose.ui.graphics.Color.Companion.LightGray
-import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.Color.Companion.Yellow
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -77,11 +58,28 @@ fun TokoSepatuApp(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-
     Scaffold(
-        topBar = { TopBarHome() },
+        topBar = {
+            if (currentRoute != Screen.DetailShoes.route) {
+                TopBarHome(
+                    navigateToProfile = {
+                        navController.navigate(Screen.Profile.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            restoreState = true
+                            launchSingleTop = true
+                        }
+                    }
+                )
+            }
+        },
         floatingActionButtonPosition = FabPosition.Center,
-        floatingActionButton = { BottomBar(navController) },
+        floatingActionButton = {
+            if (currentRoute != Screen.DetailShoes.route) {
+                BottomBar(navController)
+            }
+        },
         modifier = modifier,
         containerColor = Color.Transparent,
     ) { innerPadding ->
@@ -99,7 +97,11 @@ fun TokoSepatuApp(
             }
             composable(Screen.Cart.route) {
                 val context = LocalContext.current
-                CartScreen()
+                CartScreen(
+                    onOrderButtonClicked = { message ->
+                        shareOrder(context, message)
+                    }
+                )
             }
             composable(Screen.Favorite.route) {
                 FavoriteScreen()
@@ -109,12 +111,14 @@ fun TokoSepatuApp(
             }
             composable(
                 route = Screen.DetailShoes.route,
-                arguments = listOf(navArgument("shoesId") {type = NavType.LongType})
+                arguments = listOf(navArgument("shoesId") { type = NavType.LongType })
             ) {
                 val id = it.arguments?.getLong("shoesId") ?: -1L
                 DetailScreen(
                     shoesId = id,
-                    navigateBack = { navController.navigateUp() },
+                    navigateBack = {
+                        navController.navigate(Screen.Home.route)
+                    },
                     navigateToCart = {
                         navController.popBackStack()
                         navController.navigate(Screen.Cart.route) {
@@ -133,16 +137,16 @@ fun TokoSepatuApp(
 
 @Composable
 fun BottomBar(
-    navContoller: NavHostController,
+    navController: NavHostController,
     modifier: Modifier = Modifier
-    ) {
+) {
     BottomAppBar(
         modifier = modifier
             .padding(30.dp, 0.dp, 30.dp, 0.dp)
             .clip(RoundedCornerShape(20.dp)),
         containerColor = colorResource(id = R.color.orange),
     ) {
-        val navBackStackEntry by navContoller.currentBackStackEntryAsState()
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
         val navigationItems = listOf(
             NavigationItem(
@@ -159,7 +163,7 @@ fun BottomBar(
             ),
             NavigationItem(
                 icon = Icons.Default.AccountCircle,
-                screen = Screen.Profile
+                screen = Screen.Profile,
             )
         )
         navigationItems.map { item ->
@@ -177,8 +181,8 @@ fun BottomBar(
                 ),
                 selected = currentRoute == item.screen.route,
                 onClick = {
-                    navContoller.navigate(item.screen.route) {
-                        popUpTo(navContoller.graph.findStartDestination().id) {
+                    navController.navigate(item.screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
                         restoreState = true
