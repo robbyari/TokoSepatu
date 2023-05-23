@@ -2,7 +2,6 @@ package com.robbyari.tokosepatu.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.robbyari.tokosepatu.TokoSepatuViewModel
 import com.robbyari.tokosepatu.data.ShoesRepository
 import com.robbyari.tokosepatu.ui.screen.cart.CartViewModel
 import com.robbyari.tokosepatu.ui.screen.detail.DetailViewModel
@@ -17,8 +16,6 @@ ViewModelProvider.NewInstanceFactory() {
             return HomeViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(repository) as T
-        } else if (modelClass.isAssignableFrom(TokoSepatuViewModel::class.java)) {
-            return TokoSepatuViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(CartViewModel::class.java)) {
             return CartViewModel(repository) as T
         }

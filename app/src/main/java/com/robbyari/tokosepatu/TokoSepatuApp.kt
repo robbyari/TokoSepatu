@@ -2,12 +2,10 @@ package com.robbyari.tokosepatu
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
@@ -27,7 +25,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -36,14 +33,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.robbyari.tokosepatu.data.ShoesRepository
-import com.robbyari.tokosepatu.ui.ViewModelFactory
 import com.robbyari.tokosepatu.ui.components.TopBarHome
 import com.robbyari.tokosepatu.ui.navigation.NavigationItem
 import com.robbyari.tokosepatu.ui.navigation.Screen
 import com.robbyari.tokosepatu.ui.screen.cart.CartScreen
 import com.robbyari.tokosepatu.ui.screen.detail.DetailScreen
-import com.robbyari.tokosepatu.ui.screen.favorite.FavoriteScreen
 import com.robbyari.tokosepatu.ui.screen.home.HomeScreen
 import com.robbyari.tokosepatu.ui.screen.profile.ProfileScreen
 import com.robbyari.tokosepatu.ui.theme.TokoSepatuTheme
@@ -52,7 +46,6 @@ import com.robbyari.tokosepatu.ui.theme.TokoSepatuTheme
 @Composable
 fun TokoSepatuApp(
     modifier: Modifier = Modifier,
-    viewModel: TokoSepatuViewModel = viewModel(factory = ViewModelFactory(ShoesRepository())),
     navController: NavHostController = rememberNavController()
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -103,9 +96,6 @@ fun TokoSepatuApp(
                     }
                 )
             }
-            composable(Screen.Favorite.route) {
-                FavoriteScreen()
-            }
             composable(Screen.Profile.route) {
                 ProfileScreen()
             }
@@ -142,7 +132,7 @@ fun BottomBar(
 ) {
     BottomAppBar(
         modifier = modifier
-            .padding(30.dp, 0.dp, 30.dp, 0.dp)
+            .padding(50.dp, 0.dp, 50.dp, 0.dp)
             .clip(RoundedCornerShape(20.dp)),
         containerColor = colorResource(id = R.color.orange),
     ) {
@@ -156,10 +146,6 @@ fun BottomBar(
             NavigationItem(
                 icon = Icons.Default.ShoppingCart,
                 screen = Screen.Cart
-            ),
-            NavigationItem(
-                icon = Icons.Default.Favorite,
-                screen = Screen.Favorite
             ),
             NavigationItem(
                 icon = Icons.Default.AccountCircle,

@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -47,7 +46,7 @@ fun ProductCounter(
             modifier = Modifier.size(30.dp)
         ) {
             Text(
-                text = "-",
+                text = stringResource(R.string.min),
                 fontSize = 22.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center,
@@ -61,7 +60,6 @@ fun ProductCounter(
         Text(
             text = orderCount.toString(),
             modifier = Modifier
-                .testTag("count")
                 .weight(1f),
             fontSize = 20.sp,
             color = Color.White,
@@ -76,7 +74,7 @@ fun ProductCounter(
             modifier = Modifier.size(30.dp)
         ) {
             Text(
-                text = "+",
+                text = stringResource(R.string.plus),
                 fontSize = 22.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center,

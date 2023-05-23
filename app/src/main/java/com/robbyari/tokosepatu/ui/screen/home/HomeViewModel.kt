@@ -1,7 +1,5 @@
 package com.robbyari.tokosepatu.ui.screen.home
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.robbyari.tokosepatu.data.ShoesRepository
@@ -10,7 +8,6 @@ import com.robbyari.tokosepatu.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel(

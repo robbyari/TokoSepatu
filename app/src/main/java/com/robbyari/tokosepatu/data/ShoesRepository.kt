@@ -2,7 +2,6 @@ package com.robbyari.tokosepatu.data
 
 import com.robbyari.tokosepatu.model.FakeShoesDataSource
 import com.robbyari.tokosepatu.model.OrderShoes
-import com.robbyari.tokosepatu.model.Shoes
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -42,7 +41,7 @@ class ShoesRepository {
         return flowOf(result)
     }
 
-    fun getAddedOrderRewards(): Flow<List<OrderShoes>> {
+    fun getAddedOrderShoes(): Flow<List<OrderShoes>> {
         return getAllShoes()
             .map { orderShoes ->
                 orderShoes.filter { orderShoes ->

@@ -18,7 +18,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -36,8 +35,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.robbyari.tokosepatu.R
@@ -46,7 +43,6 @@ import com.robbyari.tokosepatu.ui.ViewModelFactory
 import com.robbyari.tokosepatu.ui.common.UiState
 import com.robbyari.tokosepatu.ui.components.OrderButton
 import com.robbyari.tokosepatu.ui.components.ProductCounter
-import com.robbyari.tokosepatu.ui.theme.TokoSepatuTheme
 
 @Composable
 fun DetailScreen(
@@ -200,16 +196,6 @@ fun DetailContent(
                 },
                 modifier = Modifier.padding(20.dp)
             )
-        }
-    }
-}
-
-@Preview(showBackground = true, device = Devices.PIXEL_4)
-@Composable
-fun DetailContentPreview() {
-    TokoSepatuTheme() {
-        Surface() {
-            DetailContent(image = R.drawable.air_force_1_sculpt_shoes, title = "Nike Air Force 1", description = "From hoops staple to urban street legend, the Nike AF-1 React takes another step forward into shoe iconography. Amplified features from the outsole to the branding add dramatic expression to the storied look while Nike React tech assists with a smooth ride. Stand out to fit in.", basePrice = 2450000, count = 1, onBackClick = {}, rating = "4.5",onAddToCart = {})
         }
     }
 }

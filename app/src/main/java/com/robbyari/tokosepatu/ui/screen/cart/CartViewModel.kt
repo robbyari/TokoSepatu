@@ -6,7 +6,6 @@ import com.robbyari.tokosepatu.data.ShoesRepository
 import com.robbyari.tokosepatu.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CartViewModel(private val repository: ShoesRepository) : ViewModel() {
@@ -18,7 +17,7 @@ class CartViewModel(private val repository: ShoesRepository) : ViewModel() {
     fun getAddedOrderShoes() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
-            repository.getAddedOrderRewards()
+            repository.getAddedOrderShoes()
                 .collect { orderShoes ->
                     val totalRequiredPrice =
                         orderShoes.sumOf { it.shoes.price * it.count }

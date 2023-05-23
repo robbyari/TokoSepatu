@@ -6,4 +6,17 @@
     <string name="add_to_cart">Tambah ke Keranjang : Rp %d</string>
     <string name="total_order">Total Pesanan : Rp %d</string>
     <string name="share_message">Hey, I want buy %1$d shoes with total price Rp %2$d. Do you want too?</string>
+    <string name="air_force_1_sculp_series_white">Air Force 1 Sculp Series White</string>
+    <string name="tambah_ke_keranjang_rp_2000000">Tambah ke Keranjang = Rp 2000000</string>
+    <string name="min">-</string>
+    <string name="plus">+</string>
+    <string name="air_force_1_sculp_shoes">Air Force 1 Sculp Shoes</string>
+    <string name="_2_450_000">2.450.000</string>
+    <string name="_4_5">4.5</string>
+    <string name="selamat_datang">Selamat Datang</string>
+    <string name="jetpack_compose">Jetpack Compose</string>
+    <string name="about_page">about_page</string>
+    <string name="photo_profile">Photo Profile</string>
+    <string name="robby_ari_wibowo">Robby Ari Wibowo</string>
+    <string name="robbyariw23_gmail_com">robbyariw23@gmail.com</string>
 </resources>

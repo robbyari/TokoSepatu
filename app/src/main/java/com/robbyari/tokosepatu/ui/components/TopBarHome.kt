@@ -1,20 +1,14 @@
 package com.robbyari.tokosepatu.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.robbyari.tokosepatu.R
@@ -50,18 +45,18 @@ fun TopBarHome(
             modifier = modifier.weight(1f),
         ) {
             Text(
-                text = "Selamat Datang",
+                text = stringResource(R.string.selamat_datang),
                 color = colorResource(id = R.color.white)
             )
             Text(
-                text = "Jetpack Compose",
+                text = stringResource(R.string.jetpack_compose),
                 style = MaterialTheme.typography.titleMedium,
                 color = colorResource(id = R.color.white)
             )
         }
         Icon(
             imageVector = Icons.Default.AccountBox,
-            contentDescription = "about_page",
+            contentDescription = stringResource(R.string.about_page),
             modifier = modifier
                 .size(30.dp)
                 .clickable { navigateToProfile() },
