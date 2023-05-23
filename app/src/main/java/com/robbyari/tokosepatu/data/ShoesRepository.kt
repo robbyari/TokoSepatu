@@ -2,7 +2,9 @@ package com.robbyari.tokosepatu.data
 
 import com.robbyari.tokosepatu.model.FakeShoesDataSource
 import com.robbyari.tokosepatu.model.OrderShoes
+import com.robbyari.tokosepatu.model.Shoes
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 
@@ -47,6 +49,16 @@ class ShoesRepository {
                     orderShoes.count != 0
                 }
             }
+    }
+
+    fun searchShoes(query: String) : Flow<List<OrderShoes>> {
+        return flow {
+            val filteredShoes = FakeShoesDataSource.dummyShoes.filter { shoes ->
+                shoes.title.contains(query, ignoreCase = true)
+            }
+            val orderShoes = filteredShoes.map { Shoes -> OrderShoes(Shoes, 1) }
+            emit(orderShoes)
+        }
     }
 
     companion object {
